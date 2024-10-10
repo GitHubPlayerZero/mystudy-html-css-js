@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>固定表格標題</title>
+	
+	<link rel="stylesheet" href="../css/all.css">
+	
+	<style>
+		
+		th, td {
+			border: 1px solid blue;
+		}
+		th {
+			background-color: green;
+			position: relative;
+		}
+		
+		.box {
+			width: 700px;
+			overflow: auto;
+			position: relative;
+		}
+		
+	</style>
+</head>
+
+<body>
+	
+	<h1>固定表格標題（雛型）</h1>
+	
+	<div class="box">
+		<table>
+			<tr>
+				<th nowrap="nowrap">標題一</th>
+				<td nowrap="nowrap">AAA - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, ex.</td>
+				<td nowrap="nowrap">BBB- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, ex.</td>
+				<td nowrap="nowrap">CCC - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, ex.</td>
+			</tr>
+			<tr>
+				<th nowrap="nowrap">標題二</th>
+				<td nowrap="nowrap">AAA- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, ex.</td>
+				<td nowrap="nowrap">BBB- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, ex.</td>
+				<td nowrap="nowrap">CCC - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, ex.</td>
+			</tr>
+		</table>
+	</div>
+	
+	
+	<script>
+		
+		const elemBox = document.querySelector(".box");
+		const elemThAry = elemBox.querySelectorAll("th");
+		
+		// elemThAry.forEach(item => {
+		// 	item.style.left = "20px";
+		// });
+		
+		elemBox.addEventListener("scroll", event => {
+			const scrollLeft = event.target.scrollLeft;
+			console.log(`event.scrollLeft ==>`, scrollLeft);
+			
+			elemThAry.forEach(item => {
+				item.style.left = `${scrollLeft}px`;
+			});
+		});
+		
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+/* Base */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 15px 15px 50px;
+	background-color: #eee;
+	font-size: 18px;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+h1 {
+	margin-top: 4px;
+}
+
+input,
+button,
+select {
+	font-size: 16px;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+	padding: 4px 12px;
+	box-shadow: 3px 3px 3px #666;
+}
+
+hr {
+	margin: 30px 0;
+}
+
+
+
+// -------------------------------------------
+/* Component */
+
+.flex-btn-group {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 16px;
+	row-gap: 20px;
+	padding: 10px 10px 15px;
+
+	&.column {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	
+	&.border {
+		border: 2px dotted #990;
+	}
+}
+
+
+.form {
+	margin: 30px 0;
+	padding: 15px;
+	border: 3px dashed blue;
+
+	input[type="submit"] {
+		margin-top: 15px;
+	}
+}
+
+.desc-area {
+	.title {
+		margin-top: 0;
+		margin-bottom: 12px;
+	}
+	.desc {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+.box {
+	margin: 30px 0;
+	padding: 15px;
+	border: 3px dashed rgb(232, 168, 18);
+}
+
+.border-table {
+	border-width: 2px;
+	border-style: solid;
+	
+	th, td {
+		border-width: 1px;
+		border-style: solid;
+		padding: 8px;
+	}
+}
+
+.sample {
+	outline: 1px dashed;
+}
+
+
+// 一列
+.grid {
+	margin-bottom: 10px;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.highlight {
+	color: red;
+	font-weight: bold;
+}
+
+.note {
+	font-size: 1rem; // 16px
+}
+
+.code {
+	border: 1px dashed gray;
+	background-color: #ddd;
+	padding: 2px 7px;
+	line-height: 2;
+}
+
+.hr {
+	margin: 30px 0;
+	border: 3px dashed #5996cc;
+}
+
+.readonly {
+	background-color: #ddd;
+}
+.disabled {
+	background-color: #ddd;
+	color: gray;
+}
+
+
+// -------------------------------------------
+/* Utility */
+
+// flex
+.d-flex {
+	display: flex;
+}
+.flex-column {
+	flex-direction: column;
+}
+.justify-center {
+	justify-content: center;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.align-items-start {
+	align-items: flex-start;
+}
+.align-items-center {
+	align-items: center;
+}
+.align-items-end {
+	align-items: flex-end;
+}
+
+
+.bold {
+	font-weight: bold;
+}
+.italic {
+	font-style: italic;
+}
+.underline {
+	text-decoration: underline;
+}
+
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+
+.white-space-pre {
+	white-space: pre;
+}
+.white-space-pre-line {
+	white-space: pre-line;
+}
+
+
+.red {
+	color: red;
+}
+
+
+/* Utility for spacing */
+.mt-0 {
+	margin-top: 0;
+}
+.mt-1 {
+	margin-top: 4px;
+}
+.mt-2 {
+	margin-top: 8px;
+}
+.mt-3 {
+	margin-top: 12px;
+}
+.mt-4 {
+	margin-top: 16px;
+}
+.mt-5 {
+	margin-top: 20px;
+}
+.mt-6 {
+	margin-top: 24px;
+}
+.mt-7 {
+	margin-top: 28px;
+}
+.mt-8 {
+	margin-top: 32px;
+}
+.mt-9 {
+	margin-top: 36px;
+}
+.mt-10 {
+	margin-top: 40px;
+}
+.mt-11 {
+	margin-top: 44px;
+}
+
+.mb-0 {
+	margin-bottom: 0;
+}
+.mb-1 {
+	margin-bottom: 4px;
+}
+.mb-2 {
+	margin-bottom: 8px;
+}
+.mb-3 {
+	margin-bottom: 12px;
+}
+.mb-4 {
+	margin-bottom: 16px;
+}
+.mb-5 {
+	margin-bottom: 20px;
+}
+.mb-6 {
+	margin-bottom: 24px;
+}
+.mb-7 {
+	margin-bottom: 28px;
+}
+.mb-8 {
+	margin-bottom: 32px;
+}
+.mb-9 {
+	margin-bottom: 36px;
+}
+.mb-10 {
+	margin-bottom: 40px;
+}
+.mb-11 {
+	margin-bottom: 44px;
+}
