@@ -192,7 +192,7 @@ const editorConfig = {
 	placeholder: 'Type or paste your content here!'
 };
 
-// configUpdateAlert(editorConfig);
+configUpdateAlert(editorConfig);
 
 DecoupledEditor.create(document.querySelector('#editor'), editorConfig).then(editor => {
 	document.querySelector('#editor-toolbar').appendChild(editor.ui.view.toolbar.element);
