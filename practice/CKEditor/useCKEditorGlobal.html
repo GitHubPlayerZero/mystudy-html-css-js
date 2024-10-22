@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>使用 CKEditor（CDN 全域變數）</title>
+
+	<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.css" />
+
+</head>
+
+<body>
+
+	<h1>使用 CKEditor（CDN 全域變數）</h1>
+
+	<div id="editor">
+		<p>Hello from CKEditor 5!</p>
+		<p>使用 全域變數 載入！</p>
+		<p>由 CKEDITOR 解構所有需要使用的物件。</p>
+	</div>
+
+
+	<script src="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.umd.js"></script>
+
+	<script>
+
+		const {
+			ClassicEditor,
+			Essentials,
+			Bold,
+			Italic,
+			Font,
+			Paragraph
+		} = CKEDITOR;
+
+		console.log(ClassicEditor);
+
+		ClassicEditor
+			.create(document.querySelector('#editor'), {
+				plugins: [Essentials, Bold, Italic, Font, Paragraph],
+				toolbar: [
+					'undo', 'redo', '|', 'bold', 'italic', '|',
+					'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+				]
+			})
+			.then((newEditor) => {
+				console.log(`newEditor ==>`, newEditor);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+
+	</script>
+
+</body>
+
+</html>

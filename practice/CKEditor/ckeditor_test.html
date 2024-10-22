@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CKEditor 測試</title>
+	
+	<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.css" />
+	
+	<style>
+		
+		h2 {
+			margin-top: 30px;
+			margin-bottom: 20px;
+		}
+		
+		.hr {
+			margin-top: 40px;
+			margin-bottom: 40px;
+			border: 3px dashed orange;
+		}
+		
+		.hr2 {
+			margin-top: 40px;
+			margin-bottom: 32px;
+			/* border: 1px dotted olivedrab; */
+			border: 2px dotted green;
+		}
+		
+	</style>
+	
+</head>
+
+<body>
+
+	<h1>CKEditor 測試</h1>
+	<p><a href="https://ckeditor.com/" target="_blank">官網</a></p>
+	
+	<hr class="hr" style="margin-top: 20px;">
+	
+	<h2>先來一些範例</h2>
+	
+	<h3>測試 1（官方基本範例）</h3>
+	<div id="editor1">
+		<p>預設不會有高度，高度是隨著內容而撐開。</p>
+	</div>
+	
+	<hr class="hr2">
+	
+	<h3>測試 2：使用 textarea</h3>
+	<p>使用 textarea，最終呈現的效果一樣。</p>
+	<textarea id="editor2">
+		使用 textarea，並使用多個 br 撐開高度。
+		<br><br><br><br><br>
+	</textarea>
+	
+	<hr class="hr2">
+	
+	<h3>測試 3：自訂義工具列</h3>
+	<div id="editor3">
+		<p>預設不會有高度，高度是隨著內容而撐開。</p>
+	</div>
+	
+	<hr class="hr">
+	
+	
+	<!-- 基本測試 -->
+	<h2>基本測試</h2>
+	
+	<p>什麼都不給的話，工具列和內容都出不來，且無法編輯。</p>
+	<div id="editorBase1">
+		<p>test123</p>
+	</div>
+	<br>
+	
+	<p>只給 Essentials，可以使用 'undo', 'redo' 的工具列，但內容不會出現，且無法編輯...</p>
+	<div id="editorBase2">
+		<p>test123</p>
+	</div>
+	<br>
+	
+	<p>再加上 Bold、Italic，可以增加使用這兩者的工具列，但內容還是出不來，且無法編輯...</p>
+	<div id="editorBase3">
+		<p>test123</p>
+	</div>
+	<br>
+	
+	<p>要使用 Paragraph 才能出現內容，但只有 Paragraph 也無法編輯，且 &lt;br> 效果也無法正確呈現。</p>
+	<div id="editorBase4">
+		<p>test123<br>456</p>
+	</div>
+	<br>
+	
+	<p>
+		或是使用 Heading 也能出現內容，並不清楚其中原理為何...<br>
+		同樣的，只有 Heading 也無法編輯、&lt;br> 效果也無法正確呈現。
+	</p>
+	<textarea id="editorBase5">
+		<p>test123<br>456</p>
+	</textarea>
+	<br>
+	
+	<p>plugins 必須要加入 Essentials 才能編輯，&lt;br> 效果也正確呈現了！</p>
+	<div id="editorBase6">
+		<p>test123<br>456</p>
+	</div>
+	<br>
+	
+	<p>
+		由此可知，<strong>若要讓編輯器達到基本可用的狀態，至少要加入 Essentials、Paragraph／Heading。</strong><br>
+		而 Essentials 自帶 'undo'、'redo' 工具可以使用。<br>
+		Heading 自帶 'heading' 工具可以使用。
+	</p>
+	<div id="editorBase7">
+		<p>test123<br>456</p>
+	</div>
+	
+	<hr class="hr">
+	
+	
+	<!-- 各種工具測試 -->
+	<h2>各種工具測試</h2>
+	
+	<!-- Heading -->
+	<h3>Heading</h3>
+	<ul>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/headings.html" target="_blank">Headings</a>
+		</li>
+	</ul>
+	
+	<div id="editorHeading">
+		<p>第一段</p>
+		<p>第二段</p>
+		<p>第三段</p>
+	</div>
+	
+	<hr class="hr2">
+	
+	<!-- 加上 Bold、Italic -->
+	<h3>加上 Bold、Italic</h3>
+	<ul>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/basic-styles.html" target="_blank">Basic text styles</a>
+		</li>
+	</ul>
+	
+	<div id="editorBoldItalic">
+		<p>不僅僅是關係到工具列的使用。</p>
+		<p><strong>有載入 Bold 才能呈現粗體效果。</strong></p>
+		<p><i>有載入 Italic 才能呈現斜體效果。</i></p>
+	</div>
+	
+	<hr class="hr2">
+	
+	<!-- Code -->
+	<h3>Code</h3>
+	<ul>
+		<li>
+			行內：
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/basic-styles.html#typing-around-inline-code" target="_blank">Typing around inline code</a>
+		</li>
+		<li>
+			區塊：
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/code-blocks.html" target="_blank">Code blocks</a>
+		</li>
+	</ul>
+	<p>有行內、區塊兩種。</p>
+	<div id="editorCode">
+		<p>請隨意試試。</p>
+	</div>
+	
+	<hr class="hr2">
+	
+	<!-- List -->
+	<h3>List</h3>
+	<ul>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/lists/lists.html" target="_blank">Ordered and unordered lists</a>
+		</li>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/lists/todo-lists.html" target="_blank">To-do lists</a>
+		</li>
+	</ul>
+	
+	<p>有 todoList、bulletedList、numberedList...</p>
+	<div id="editorList">
+		<p>第一行</p>
+		<p>第二行</p>
+		<p>第三行</p>
+	</div>
+	<br>
+	
+	<p>
+		<a href="https://ckeditor.com/docs/ckeditor5/latest/features/lists/lists.html#list-properties-2" target="_blank">ListProperties</a> 讓 bulletedList、numberedList 可以有更多功能。<br>
+		預設即為「多種清單樣式」。
+	</p>
+	<div id="editorList2">
+		<p>第一行</p>
+		<p>第二行</p>
+		<p>第三行</p>
+	</div>
+	<br>
+	
+	<p>但若想要讓有序清單擁有 startIndex、reversed 的功能，則必須將「多種清單樣式」關閉，此時無序、有序也需要分別使用 List、ListProperties。</p>
+	<div id="editorList3">
+		<p>第一行</p>
+		<p>第二行</p>
+		<p>第三行</p>
+	</div>
+	
+	<hr class="hr2">
+	
+	<!-- Link -->
+	<h3>Link</h3>
+	<ul>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/link.html" target="_blank">Link</a>
+		</li>
+	</ul>
+	
+	<div id="editorLink">
+		<p>插入連結，自帶熱鍵 Ctrl + K。</p>
+	</div>
+	
+	<hr class="hr2">
+	
+	<!-- 圖片 -->
+	<h3>圖片</h3>
+	<ul>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/images/images-installation.html" target="_blank">Installation</a>
+		</li>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/images/images-inserting.html" target="_blank">Inserting images</a>
+		</li>
+	</ul>
+	
+	<p>
+		Image 是基本必須載入（<code>plugins</code>）的。<br>
+		當 tool bar 只需要 upload（<code>'uploadImage'</code>）的功能時，需再額外載入 ImageUpload 或 ImageInsert。
+	</p>
+	<div id="editorImage1">
+		<p>請隨意試試。</p>
+	</div>
+	<br>
+	
+	<p>
+		但若想要使用 insert URL（<code>'insertImage'</code>）功能時，就必須載入 <strong>ImageInsert</strong>。<br>
+		若載入 ImageUpload 則仍然只會有 upload 的功能；載入 ImageInsert 則同時包含 upload、insert URL 功能。
+	</p>
+	<p>因此，其實也可以只載入 ImageInsert，tool bar 再設定是 <code>'uploadImage'</code>（只有 upload）還是 <code>'insertImage'</code>（upload 和 insert URL 都有）。</p>
+	<div id="editorImage2">
+		<p>請隨意試試。</p>
+	</div>
+	<br>
+	
+	<p>若只想要有 insert URL 功能的話，<code>plugins</code> 就要改用 <a href="https://ckeditor.com/docs/ckeditor5/latest/api/module_image_imageinsertviaurl-ImageInsertViaUrl.html" target="_blank">ImageInsertViaUrl</a>。</p>
+	<div id="editorImage3">
+		<p>請隨意試試。</p>
+	</div>
+	<br>
+	
+	<p>然而，上傳圖片會需要搭配 adapter 才能執行後續的實際上傳動作。</p>
+	<p>可以參考以下文件：</p>
+	<ul>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html#how-it-works" target="_blank">
+				How it works
+			</a>
+		</li>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/simple-upload-adapter.html" target="_blank">
+				Simple upload adapter
+			</a>
+		</li>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html" target="_blank">
+				Base64 image upload adapter
+			</a>
+		</li>
+		<li>
+			<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/deep-dive/upload-adapter.html" target="_blank">
+				Custom image upload adapter
+			</a>
+		</li>
+	</ul>
+	
+	
+	
+	<br><br><br>
+
+	<script type="module" src="./ckeditor_test.js"></script>
+
+</body>
+
+</html>

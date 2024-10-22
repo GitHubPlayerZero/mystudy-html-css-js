@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>使用 CKEditor（CDN 模組）</title>
+	
+	<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.css" />
+	
+</head>
+
+<body>
+
+	<h1>使用 CKEditor（CDN 模組）</h1>
+
+	<div id="editor">
+		<p>Hello from CKEditor 5!</p>
+		<p>使用 Module 載入！</p>
+		<p>具名匯入所有需要使用的模組。</p>
+	</div>
+
+
+	<script type="module">
+
+		import {
+			ClassicEditor,
+			Essentials,
+			Bold,
+			Italic,
+			Font,
+			Paragraph
+		} from 'https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.js';
+
+		console.log(ClassicEditor);
+
+		ClassicEditor
+			.create(document.querySelector('#editor'), {
+				plugins: [Essentials, Bold, Italic, Font, Paragraph],
+				toolbar: [
+					'undo', 'redo', '|', 'bold', 'italic', '|',
+					'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+				]
+			})
+			.then( (newEditor) => {
+				console.log(`newEditor ==>`, newEditor);
+			} )
+			.catch( (error) => {
+				console.error(error);
+			} );
+
+	</script>
+
+</body>
+
+</html>
