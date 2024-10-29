@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>表單驗證 - 原生寫法</title>
+	
+	<link rel="stylesheet" href="../../css/all.css">
+	
+	<style>
+		.w-100 {
+			width: 100%;
+		}
+		
+		.d-block {
+			display: block;
+		}
+		
+		.gap {
+			column-gap: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>表單驗證 - 原生寫法</h1>
+	
+	<div class="d-flex gap">
+		
+		<!-- 表單 -->
+		<form id="form1" class="form mb-10" style="flex-shrink: 0;">
+			
+			<input type="hidden" id="form1Hidden1" value="I'm hidden element">
+			
+			<input type="text" id="form1Text1" placeholder="text1" class="d-block w-100 mb-3" required>
+			<input type="number" id="form1Text2" placeholder="text2 數字 (輸入 e 測試)" class="d-block w-100 mb-3" required>
+			<input type="email" id="form1Text3" placeholder="text3 Email (非必填)" class="d-block w-100 mb-3">
+			
+			<div class="mb-3">
+				<label>
+					<input type="checkbox" name="form1Ckb1" id="form1Ckb1A" value="checkbox1">&nbsp;checkbox1 (A)
+				</label>
+				<label>
+					<input type="checkbox" name="form1Ckb1" id="form1Ckb1B" value="checkbox1" required>&nbsp;checkbox1 (B)
+				</label>
+			</div>
+			
+			<div class="mb-3">
+				<label>
+					<input type="radio" name="form1Radio1" id="form1Radio1A" value="radio1 (A)">&nbsp;radio1 (A)
+				</label>
+				<label>
+					<input type="radio" name="form1Radio1" id="form1Radio1B" value="radio1 (B)" required>&nbsp;radio1 (B)
+				</label>
+				<label>
+					<input type="radio" name="form1Radio1" id="form1Radio1C" value="radio1 (C)">&nbsp;radio1 (C)
+				</label>
+			</div>
+			
+			<select id="form1Select1" class="d-block mb-3" required>
+				<option value="">--- select1 ---</option>
+				<option value="AAA">AAA</option>
+				<option value="BBB">BBB</option>
+				<option value="CCC">CCC</option>
+			</select>
+			
+			<textarea id="form1Textarea1" class="mb-2" placeholder="textarea1" rows="5" cols="35" required></textarea>
+			
+			<div>
+				<input type="submit" id="btnSubmit">&nbsp;&nbsp;&nbsp;
+				<input type="reset" id="btnReset">&nbsp;&nbsp;&nbsp;
+				<button type="button" id="btnClear" onclick="clearConsole();">清空 Console</button>
+			</div>
+		</form>
+		<!-- 表單 - end -->
+		
+		
+		<!-- 功能 -->
+		<div style="height: calc(100dvh - 160px); overflow: auto; outline: 1px dashed yellowgreen;">
+			
+			<!-- willValidate -->
+			<h2>willValidate（屬性）</h2>
+			<p>是否為可被驗證的表單控件元素。</p>
+			
+			<p>以下元素無法被驗證：</p>
+			<ul>
+				<li class="mb-2">設定為 <code>disabled</code> 的元素。</li>
+				<li class="mb-2">
+					設定為 <code>readonly</code> 的元素。
+					
+					<p class="mt-2 mb-2"><strong>注意：即使是 checkbox、radio、select 等須設置為 disabled 才有禁止操作效果的元素，設定為 readonly 也會被略過檢驗。</strong></p>
+					
+					<p class="mt-2 mb-2">P.S. 同一組 radio button 必須每個項目均為 disabled 或 readonly 才會略過檢驗。</p>
+				</li>
+				<li class="mb-2"><code>hidden</code> 元素。</li>
+				<li class="mb-2"><code>type=button</code>、<code>type=reset</code> 的元素。</li>
+			</ul>
+			
+			<div class="box">
+				<div class="flex-btn-group">
+					<button type="button" onclick="setElementDisabled('#form1Text1');">設定／取消 text1 為 disabled</button>
+					<button type="button" onclick="setElementReadonly('input[name=form1Ckb1]');">設定／取消 checkbox1 為 readonly</button>
+					<button type="button" onclick="setElementReadonly('input[name=form1Radio1]');">設定／取消 radio1 為 readonly</button>
+					<button type="button" onclick="setElementReadonly('#form1Select1');">設定／取消 select1 為 readonly</button>
+				</div>
+				
+				<hr class="mt-2 mb-2">
+				
+				<div class="flex-btn-group">
+					<button type="button" onclick="showElementWillValidaty('#form1Text1')">text1</button>
+					<button type="button" onclick="showElementWillValidaty('input[name=form1Ckb1]')">checkbox</button>
+					<button type="button" onclick="showElementWillValidaty('input[name=form1Radio1]')">radio</button>
+					<button type="button" onclick="showElementWillValidaty('#form1Select1')">select1</button>
+					<button type="button" onclick="showElementWillValidaty('#form1Hidden1')">hidden1</button>
+					<button type="button" onclick="showElementWillValidaty('#btnSubmit')">Submit button</button>
+					<button type="button" onclick="showElementWillValidaty('#btnReset')">Reset button</button>
+					<button type="button" onclick="showElementWillValidaty('#btnClear')">「清空 Console」 button</button>
+				</div>
+			</div>
+			
+			
+			<!-- checkValidity() -->
+			<h2>checkValidity()</h2>
+			<p>
+				驗證當前的表單控件或整份表單是否通過驗證。<br>
+				驗證不通過者會觸發其 <code>invalid</code> 事件。
+			</p>
+			
+			<div class="box">
+				<div class="flex-btn-group">
+					<button type="button" onclick="checkElementValidaty('#form1Text1')">text1</button>
+					<button type="button" onclick="checkElementValidaty('#form1Text2')">text2</button>
+					<button type="button" onclick="checkElementValidaty('#form1Text3')">text3</button>
+					<button type="button" onclick="checkElementValidaty('input[name=form1Ckb1]')">checkbox</button>
+					<button type="button" onclick="checkElementValidaty('input[name=form1Radio1]')">radio</button>
+					<button type="button" onclick="checkElementValidaty('#form1Select1')">select1</button>
+					<button type="button" onclick="checkElementValidaty('#form1Textarea1')">textarea1</button>
+				</div>
+				
+				<hr class="mt-2 mb-2">
+				
+				<div class="flex-btn-group">
+					<button type="button" onclick="checkForm1Validaty()">整個表單</button>
+				</div>
+			</div>
+			
+			
+			<!-- reportValidity() -->
+			<h2>reportValidity()</h2>
+			<p>除了 <code>checkValidity()</code> 的功能之外，驗證不通過者會再進一步觸發驗證提示，即為提交表單時會看到的驗證效果。</p>
+			
+			<div class="box">
+				<div class="flex-btn-group">
+					<button type="button" onclick="reportElementValidaty('#form1Text1')">text1</button>
+					<button type="button" onclick="reportElementValidaty('#form1Text2')">text2</button>
+					<button type="button" onclick="reportElementValidaty('#form1Text3')">text3</button>
+					<button type="button" onclick="reportElementValidaty('input[name=form1Ckb1]')">checkbox</button>
+					<button type="button" onclick="reportElementValidaty('input[name=form1Radio1]')">radio</button>
+					<button type="button" onclick="reportElementValidaty('#form1Select1')">select1</button>
+					<button type="button" onclick="reportElementValidaty('#form1Textarea1')">textarea1</button>
+				</div>
+				
+				<hr class="mt-2 mb-2">
+				
+				<div class="flex-btn-group">
+					<button type="button" onclick="reportForm1Validaty()">整個表單</button>
+				</div>
+			</div>
+			
+			
+			<!-- validity、validationMessage -->
+			<h2>validity、validationMessage（屬性）</h2>
+			
+			<p><code>validaty</code> 會返回一個元素受到驗證的有效性狀態，由其中的屬性可以知道有沒有通過驗證（<code>valid</code> 屬性），以及沒通過的是哪個驗證。</p>
+			
+			<p><code>validationMessage</code> 則是沒通過驗證時，會顯示的訊息。</p>
+			
+			<P>註：此範例有增加使用 <code>reportValidity()</code> 觸發驗證效果，以便觀察。</P>
+			
+			<div class="box">
+				<div class="flex-btn-group">
+					<button type="button" onclick="showElementValidatyAndMessage('#form1Text1')">text1</button>
+					<button type="button" onclick="showElementValidatyAndMessage('#form1Text2')">text2</button>
+					<button type="button" onclick="showElementValidatyAndMessage('#form1Text3')">text3</button>
+					<button type="button" onclick="showElementValidatyAndMessage('input[name=form1Ckb1]')">checkbox</button>
+					<button type="button" onclick="showElementValidatyAndMessage('input[name=form1Radio1]')">radio</button>
+					<button type="button" onclick="showElementValidatyAndMessage('#form1Select1')">select1</button>
+					<button type="button" onclick="showElementValidatyAndMessage('#form1Textarea1')">textarea1</button>
+				</div>
+			</div>
+			
+			
+			<!-- setCustomValidity() -->
+			<h2>setCustomValidity()</h2>
+			<p>自訂驗證訊息。</p>
+			
+			<p>
+				要注意的是，對元素設置了自訂訊息之後，此元素的 <code>validity.customError</code> 就會為 <code>true</code>，所以此元素就會驗證<strong>不通過</strong>。<br>
+				因此若要對某個控件元素使用自訂訊息，通常需要改為自己<strong>手動操控這個元素的整個驗證流程</strong>，而不能使用原本的自動驗證，不然永遠都不會通過。
+			</p>
+			
+			<p>如果訊息給入的是空字串，代表取消自訂訊息。</p>
+			
+			<div class="box">
+				<div class="flex-btn-group">
+					<button type="button" onclick="setValidityMsg('#form1Text2')">自訂 text2 驗證訊息</button>
+					<button type="button" onclick="clearValidityMsg('#form1Text2')">取消 text2 自訂訊息</button>
+					<!-- <button type="button" onclick="addText2Checking()">手動操控 text2 的驗證流程</button>
+					<button type="button" onclick="removeText2Checking()">取消 text2 的手動驗證流程</button> -->
+					<button type="button" onclick="text2Checking.addChecking()">手動操控 text2 的驗證流程</button>
+					<button type="button" onclick="text2Checking.removeChecking()">取消 text2 的手動驗證（含自訂訊息）</button>
+				</div>
+			</div>
+			
+		</div>
+		<!-- 功能 - end -->
+		
+	</div>
+	
+	
+	<script src="./表單驗證_原生.js"></script>
+</body>
+
+</html>
