@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Validate.js</title>
+	
+	<link rel="stylesheet" href="../../css/all.css">
+	
+	<style>
+		.grid {
+			display: block;
+		}
+		
+		.error-message {
+			color: red;
+			font-size: 16px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Validate.js 測試</h1>
+	
+	<hr class="hr">
+	
+	<button type="button" onclick="testBase();">官網基本 JS 範例測試</button>
+	
+	<hr>
+	
+	<h2>直接使用表單資料</h2>
+	
+	<form id="form1">
+		<label class="grid">
+			姓名：
+			<input type="text" name="userName">
+		</label>
+		<label class="grid mb-7">
+			密碼：
+			<input type="password" name="password">
+		</label>
+		
+		<div>
+			<input type="button" value="送出" onclick="testForm1();">
+		</div>
+	</form>
+	
+	<hr>
+	
+	<h2>客製化訊息</h2>
+	
+	<h3>純 JS 檢核測試</h3>
+	<div>
+		<button type="button" onclick="testCustom1();">純 JS 檢核測試</button>
+	</div>
+	
+	<br>
+	
+	<h3>表單測試</h3>
+	<form id="form2">
+		<label class="grid">
+			姓名：
+			<input type="text" name="userName">
+		</label>
+		<label class="grid mb-7">
+			密碼：
+			<!-- name 使用中文 -->
+			<input type="password" name="密碼">
+		</label>
+		
+		<div>
+			<input type="button" value="送出" onclick="testCustom2();">
+		</div>
+	</form>
+	
+	<hr>
+	
+	<h2>檢核數字</h2>
+	
+	<h3>純 JS 檢核測試</h3>
+	<ul>
+		<li class="mb-3">
+			使用嚴格檢核時，對於 "+3"、".3"、"03" 這樣的寫法都會檢核不通過。
+		</li>
+		<li>
+			科學記數法：<br>
+			使用嚴格檢核時，科學記數法會不通過（不管其值正不正確）；非嚴格模式則可以正確檢查其值。<br>
+			測試：e（不正確）、e77（不正確）、7.823E5（正確）、1.2e−4（正確）
+		</li>
+	</ul>
+	
+	<div>
+		<input type="button" value="純 JS 檢核測試" onclick="testNumber();">
+	</div>
+	
+	<br>
+	
+	<h3>表單測試</h3>
+	<ul>
+		<li class="mb-3">輸入 "+3"、".3"、"03"，在<span class="bold">嚴格模式</span>下，text 類型的輸入框不會通過驗證，但 <span class="bold">number 類型的輸入框仍然會通過</span>。</li>
+		<li class="mb-3">
+			科學記數法：
+			<ul>
+				<li class="mb-2">
+					<span class="bold">text 類型的輸入框：</span><br>
+					在嚴格模式下，只要有輸入科學符號（e）就不會通過；非嚴格模式下則會依據其數值正確性檢核。<br>
+				</li>
+				<li class="mb-2">
+					<span class="bold">number 類型的輸入框：</span><br>
+					由於「e」為科學符號，因此即使是 number 亦可以輸入。<br>
+					然而不管輸入的值正不正確、嚴格／非嚴格模式都無法正常檢核，最後結果都會是<span class="bold">通過</span>。<br>
+					註 1：若輸入的是不正確的值，用 JS 取值時會得到<span class="bold">空值</span>。<br>
+					註 2：HTML 原生的檢核可以正確驗證。
+				</li>
+			</ul>
+		</li>
+		<li class="mb-3">
+			結論：若想要驗證科學記數法，可能不太適合使用 Validate.js，而要自己撰寫檢核。
+		</li>
+	</ul>
+	
+	<form id="formNumber" action="javascript:void(0)" class="box">
+		<label class="grid">
+			type is text：
+			<input type="text" name="text">
+		</label>
+		<label class="grid">
+			type is number：
+			<input type="number" name="number">
+		</label>
+		<div class="mt-7">
+			<button onclick="testFormNumber();">送出</button>
+		</div>
+	</form>
+	
+	<hr>
+	
+	<h2>各種檢核測試</h2>
+	<form id="form3" action="javascript:void(0)" novalidate>
+		<label class="grid">
+			<font color="red">*</font> 姓名：
+			<input type="text" name="userName">
+		</label>
+		<label class="grid">
+			<font color="red">*</font> 密碼：
+			<input type="password" name="password">
+		</label>
+		<label class="grid">
+			Email：
+			<input type="email" name="email">
+		</label>
+		<label class="grid">
+			數量：
+			<input type="number" name="quantity">
+		</label>
+		<label class="grid">
+			金額：
+			<input type="number" name="amount">
+		</label>
+		
+		<fieldset class="mt-7">
+			<legend>&nbsp;&nbsp;URL 相關&nbsp;&nbsp;</legend>
+			<label class="grid">
+				部落格：
+				<input type="url" name="blog">
+			</label>
+			<label class="grid">
+				FTP：
+				<input type="url" name="ftp">
+			</label>
+			<label class="grid">
+				website：
+				<input type="url" name="website">
+			</label>
+		</fieldset>
+		
+		<div class="mt-7">
+			<input type="submit" value="送出" onclick="testAll();">
+		</div>
+	</form>
+	
+	<hr>
+	
+	<h2>搭配訊息顯示</h2>
+	<form id="form4" action="javascript:void(0)" novalidate>
+		<label class="grid">
+			<font color="red">*</font> 姓名：
+			<input type="text" name="userName">
+			<div class="error-message" data-check="userName"></div>
+		</label>
+		<label class="grid">
+			<font color="red">*</font> 密碼：
+			<input type="password" name="password">
+			<div class="error-message" data-check="password"></div>
+		</label>
+		<label class="grid">
+			Email：
+			<input type="email" name="email">
+			<div class="error-message" data-check="email"></div>
+		</label>
+		<label class="grid">
+			數量：
+			<input type="number" name="quantity">
+			<div class="error-message" data-check="quantity"></div>
+		</label>
+		<label class="grid">
+			金額：
+			<input type="number" name="amount">
+			<div class="error-message" data-check="amount"></div>
+		</label>
+		
+		<fieldset class="mt-7">
+			<legend>&nbsp;&nbsp;URL 相關&nbsp;&nbsp;</legend>
+			<label class="grid">
+				部落格：
+				<input type="url" name="blog">
+				<div class="error-message" data-check="blog"></div>
+			</label>
+			<label class="grid">
+				FTP：
+				<input type="url" name="ftp">
+				<div class="error-message" data-check="ftp"></div>
+			</label>
+			<label class="grid">
+				website：
+				<input type="url" name="website">
+				<div class="error-message" data-check="website"></div>
+			</label>
+		</fieldset>
+		
+		<div class="mt-7">
+			<input type="submit" value="送出" onclick="testMessage();">
+		</div>
+	</form>
+	
+
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+	<script src="./validate.js"></script>
+</body>
+
+</html>
