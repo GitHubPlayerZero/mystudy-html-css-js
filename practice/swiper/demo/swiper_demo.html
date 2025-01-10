@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper Demo</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./swiper_demo.css">
+</head>
+
+<body>
+  <h1>Swiper Demo</h1>
+
+  <h2>基本測試</h2>
+
+  <!-- 只有一個 -->
+  <h3>只有一個</h3>
+  <p>當只有提供一個 slide 時，<code>pagination</code> 無法出現，console 也會出現警告訊息。</p>
+  
+  <div class="swiper demo-pagination-base1">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- 有兩個 -->
+  <h3>有兩個</h3>
+
+  <div class="swiper demo-pagination-base2">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <hr />
+
+  <h2>分頁樣式</h2>
+
+  <!-- 分頁 - 動態 -->
+  <h3>動態</h3>
+  <div class="swiper demo-pagination-dynamic">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- 分頁 - progress bar -->
+  <h3>progress bar</h3>
+  <div class="swiper demo-pagination-progress">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination" id="paginationProgress"></div>
+  </div>
+
+  <!-- 調整 progress bar 樣式 -->
+  <div style="margin-bottom: 32px;">
+    <label>
+      <input type="checkbox" onclick="paginationProgressBar.placeProgressBelow(this);">&nbsp;
+      Progress bar 顯示在下面
+    </label>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>
+      <input type="checkbox" onclick="paginationProgressBar.increaseProgressSize(this);">&nbsp;
+      加大 Progress bar
+    </label>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>
+      <input type="checkbox" onclick="paginationProgressBar.changeProgressColor(this);">&nbsp;
+      改變 Progress bar 顏色
+    </label>
+  </div>
+
+  <!-- 分頁 - 分頁數 -->
+  <h3>分頁數</h3>
+  <div class="swiper demo-pagination-fraction">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- 分頁 - 自訂 -->
+  <h3>自訂</h3>
+  <p>
+    可以使用 <code>renderBullet</code> 屬性回傳自訂的 HTML，並自訂樣式。<br>
+    但激活的樣式會固定套用 <code>.swiper-pagination-bullet-active</code> class，因此需要建立此名稱的 class 並定義自己想要的樣式內容。
+  </p>
+
+  <div class="swiper demo-pagination-custom">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <hr>
+
+  <h2>垂直</h2>
+  <div class="swiper demo-pagination-vertical">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <hr>
+
+  <h2>自動播放</h2>
+  <p>這邊設計為當對輪播進行操作時，會中斷自動播放（<code>disableOnInteraction: true</code>）。</p>
+  
+  <div class="swiper demo-pagination-auto">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- 自動播放倒計時 -->
+    <div class="autoplay-progress">
+      <svg viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20"></circle>
+      </svg>
+      <span></span>
+    </div>
+  </div>
+  
+  <hr>
+  
+  <h2>一頁多個 view</h2>
+  <div class="swiper demo-pagination-perview">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+  
+  <hr>
+  
+  <h2>可鍵盤控制</h2>
+  <p>目前測試的效果是：只要在畫面上按向左、向右鍵都會控制視圖跳轉。</p>
+  
+  <div class="swiper demo-pagination-keyboard">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <br><br><br>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./swiper_demo.js"></script>
+</body>
+
+</html>
