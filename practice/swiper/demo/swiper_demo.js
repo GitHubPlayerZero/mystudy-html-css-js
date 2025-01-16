@@ -31,7 +31,7 @@ const paginationBase2 = new Swiper(".demo-pagination-base2", {
 
 
 /* 分頁樣式 */
-// 分頁 - 動態
+// 分頁 - 動態樣式
 const paginationDynamic = new Swiper(".demo-pagination-dynamic", {
   ...baseSettings,
   pagination: {
@@ -188,4 +188,41 @@ const paginationKeyboard = new Swiper(".demo-pagination-keyboard", {
   keyboard: {
     enabled: true,
   },
+});
+
+
+/* 控制 Swiper 實例 */
+function useControlledSwiper()
+{
+  const controlledSwiper = new Swiper(".demo-controlled", {
+    ...baseSettings,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+  console.log(controlledSwiper);
+  
+  // 往前
+  function toPrev() {
+    controlledSwiper.slidePrev();
+  }
+  
+  // 往後
+  function toNext() {
+    controlledSwiper.slideNext();
+  }
+  
+  return { toPrev, toNext };
+}
+const controlledSwiper = useControlledSwiper();
+
+
+// 初始
+document.addEventListener("DOMContentLoaded", (event) => {
+  // 取得 Swiper 實例的另一種方式
+  const elemControlledSwiper = document.querySelector(".demo-controlled");
+  const controlledSwiper2 = elemControlledSwiper.swiper;
+  console.dir(elemControlledSwiper);
+  console.dir(controlledSwiper2);
+  // controlledSwiper2.slidePrev();
 });

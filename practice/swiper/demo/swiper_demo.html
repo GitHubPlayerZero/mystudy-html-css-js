@@ -15,8 +15,8 @@
 
   <h2>基本測試</h2>
 
-  <!-- 只有一個 -->
-  <h3>只有一個</h3>
+  <!-- 只有一個 Slide -->
+  <h3>只有一個 Slide</h3>
   <p>當只有提供一個 slide 時，<code>pagination</code> 無法出現，console 也會出現警告訊息。</p>
   
   <div class="swiper demo-pagination-base1">
@@ -30,8 +30,8 @@
     <div class="swiper-pagination"></div>
   </div>
 
-  <!-- 有兩個 -->
-  <h3>有兩個</h3>
+  <!-- 有兩個 Slide -->
+  <h3>有兩個 Slide</h3>
 
   <div class="swiper demo-pagination-base2">
     <div class="swiper-wrapper">
@@ -49,8 +49,8 @@
 
   <h2>分頁樣式</h2>
 
-  <!-- 分頁 - 動態 -->
-  <h3>動態</h3>
+  <!-- 分頁 - 動態樣式 -->
+  <h3>動態樣式</h3>
   <div class="swiper demo-pagination-dynamic">
     <div class="swiper-wrapper">
       <div class="slide1 swiper-slide">Slide 1</div>
@@ -148,9 +148,7 @@
     <div class="swiper-pagination"></div>
   </div>
 
-  <hr>
-
-  <h2>垂直</h2>
+  <h3>垂直</h3>
   <div class="swiper demo-pagination-vertical">
     <div class="swiper-wrapper">
       <div class="slide1 swiper-slide">Slide 1</div>
@@ -217,7 +215,10 @@
   <hr>
   
   <h2>可鍵盤控制</h2>
-  <p>目前測試的效果是：只要在畫面上按向左、向右鍵都會控制視圖跳轉。</p>
+  <p>
+    目前測試的效果是：只要在畫面上按向左、向右、PgUp、PgDn 都會控制視圖跳轉。<br />
+    看起來事件的監聽是綁定在 document。
+  </p>
   
   <div class="swiper demo-pagination-keyboard">
     <div class="swiper-wrapper">
@@ -235,6 +236,29 @@
     <!-- pagination -->
     <div class="swiper-pagination"></div>
   </div>
+  
+  <hr>
+  
+  <h2>操控 Swiper 實例</h2>
+  
+  <div class="swiper demo-controlled">
+    <div class="swiper-wrapper">
+      <div class="slide1 swiper-slide">Slide 1</div>
+      <div class="slide2 swiper-slide">Slide 2</div>
+      <div class="slide3 swiper-slide">Slide 3</div>
+      <div class="slide4 swiper-slide">Slide 4</div>
+      <div class="slide5 swiper-slide">Slide 5</div>
+      <div class="slide6 swiper-slide">Slide 6</div>
+      <div class="slide7 swiper-slide">Slide 7</div>
+    </div>
+    <!-- pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+  
+  <!-- 自訂控制按鈕 -->
+  <button type="button" onclick="controlledSwiper.toPrev();">往前</button>
+  &nbsp;
+  <button type="button" onclick="controlledSwiper.toNext();">往後</button>
 
   <br><br><br>
 

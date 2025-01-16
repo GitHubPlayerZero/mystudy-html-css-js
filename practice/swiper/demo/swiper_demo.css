@@ -1,4 +1,4 @@
-body {
+body, button {
   font-size: 20px;
 }
 code {
@@ -67,6 +67,11 @@ code {
   opacity: 1;
   background: rgba(0, 0, 0, 0.2);
 }
+
+/*
+  Pagination 激活樣式
+  此內容需放在 swiper-pagination-custom 之後撰寫，否則無法覆蓋。
+*/
 .swiper-pagination-bullet-active {
   color: #fff;
   background: #007aff;
