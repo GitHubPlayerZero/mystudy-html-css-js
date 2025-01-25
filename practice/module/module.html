@@ -11,63 +11,111 @@
 
 <body>
   <h1>Module 測試</h1>
-  <p>請開啟 console 觀看測試結果。</p>
+  <p class="mb-6">請開啟 console 觀看測試結果。</p>
   
-  
-  <!-- 匯入原始模組 -->
-  <script type="module" src="./module.js"></script>
-  
-  <!-- 匯入原始模組 2 -->
+  <p class="mb-2">CodePen：</p>
+  <ul class="mt-1">
+    <li><a href="https://codepen.io/codepenplayer/pen/KwPrZYX" target="_blank">JS：模組測試</a></li>
+    <li><a href="https://codepen.io/codepenplayer/pen/OPLazGX" target="_blank">JS：模組測試 - module 腳本</a></li>
+    <li><a href="https://codepen.io/codepenplayer/pen/WbeYdWj" target="_blank">JS：模組測試 - 非模組腳本</a></li>
+  </ul>
+
+  <hr />
+
+  <h2>測試心得</h2>
+  <ul>
+    <li>非模組的腳本區塊會優先執行，即使是寫在模組的腳本區塊之後。</li>
+    <li>如果是使用 import 匯入模組，import 語法會先於此模組區塊中的其它程式執行。</li>
+    <li>相同的模組腳本只會執行一次。</li>
+    <li>同一個模組的資料為全域共用。</li>
+    <li>匯入的模組若加上參數，會被視為不同的模組。</li>
+  </ul>
+
+
+  <!-- 匯入模組腳本 -->
+  <script type="module">console.log(`======== 匯入模組腳本 ========`);</script>
+  <!-- <script type="module" src="./module.js"></script> -->
   <script type="module">
-    console.log(``);
+    console.log(`import module 1...`);
+    console.log(`即使此 console log 寫在 import 之前，import 還是會優先執行。`);
+    import './module.js';
+  </script>
+  <script type="module">console.log("");</script>
+
+  <!-- 匯入模組腳本 (重複匯入 2) -->
+  <script type="module">console.log(`======== 匯入模組腳本 (重複匯入 2) ========`);</script>
+  <script type="module">
     console.log(`import module 2...`);
+    console.log(`雖然再次匯入模組，但因為是相同的模組，所以不會再次執行。`);
     import { getCnt, addCnt } from './module.js';
     console.log(`getCnt ==>`, getCnt());
     addCnt();
   </script>
-  
-  <!-- 匯入 name 參數模組 -->
+  <script type="module">console.log("");</script>
+
+  <!-- 匯入模組腳本 (帶參數 name=test) -->
+  <script type="module">
+    console.log(`======== 匯入模組腳本 (帶參數 name=test) ========`);
+    console.log(`匯入模組時另外帶有參數，會被視為不同的模組，因此模組會重新被執行。`);
+  </script>
   <script type="module" src="./module.js?name=test"></script>
-  
-  <!-- 匯入原始模組 3 -->
+  <script type="module">console.log("");</script>
+
+  <!-- 匯入模組腳本 (重複匯入 3) -->
+  <script type="module">console.log(`======== 匯入模組腳本 (重複匯入 3) ========`);</script>
   <script type="module">
-    console.log(``);
     console.log(`import module 3...`);
+    console.log(`匯入模組時未帶參數，會與未帶參數的模組共用。`);
     import { getCnt, addCnt } from './module.js';
     console.log(`getCnt ==>`, getCnt());
     addCnt();
   </script>
-  
-  <!-- 匯入 name 參數模組 2 -->
+  <script type="module">console.log("");</script>
+
+  <!-- 匯入模組腳本 (帶參數 name=test) (重複匯入 2) -->
+  <script type="module">console.log(`======== 匯入模組腳本 (帶參數 name=test) (重複匯入 2) ========`);</script>
   <script type="module">
-    console.log(``);
     console.log(`[name=test] import module 2...`);
+    console.log(`匯入模組時帶入相同參數，會與帶參數的模組共用。`);
     import { getCnt, addCnt } from './module.js?name=test';
     console.log(`[name=test] getCnt ==>`, getCnt());
     addCnt();
   </script>
-  
-  
+  <script type="module">console.log("");</script>
+
+
   <!-- 
-    非模組腳本
+    匯入非模組腳本
     雖然寫在後面，但仍會優先被執行。
   -->
+  <script>
+    console.clear();
+    console.log(`======== 匯入非模組腳本 ========`);
+    console.log(`非模組腳本無論寫在哪都會優先被執行`);
+  </script>
   <script src="./test.js"></script>
-  
+  <script>console.log("");</script>
+
   <!-- 
+    匯入非模組腳本 (重複匯入)
     非模組腳本每次匯入都會執行，因此這邊會發生全域變數 count 重複宣告的問題：
     SyntaxError: Identifier 'count' has already been declared 
   -->
+  <script>console.log(`======== 匯入非模組腳本 (重複匯入) ========`);</script>
   <script src="./test.js"></script>
-  
+  <script>console.log("");</script>
+
+  <!-- 執行非模組腳本區塊 -->
+  <script>console.log(`======== 執行非模組腳本區塊 ========`);</script>
   <script>
-    console.log(`==========`);
     console.log(`我是非模組 JS 腳本區塊`);
     // 非模組腳本的作用域是相通的，因此這邊可以直接使用 count。
-    count ++;
-    console.log(`count ==> ${count}`);
+    count++;
+    console.log(`count ++ ==> ${count}`);
+
+    console.log(``);
   </script>
-  
+
 </body>
 
 </html>

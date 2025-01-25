@@ -1,4 +1,3 @@
-console.log(`==========`);
 // 取得模組 URL 資訊
 const moduleUrl = new URL(import.meta.url);
 console.log(`Module URL ==>`, moduleUrl);
