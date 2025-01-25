@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 測試</title>
+
+  <link rel="stylesheet" href="../../css/all.css">
+</head>
+
+<body>
+  <h1>Module 測試</h1>
+  <p>請開啟 console 觀看測試結果。</p>
+  
+  
+  <!-- 匯入原始模組 -->
+  <script type="module" src="./module.js"></script>
+  
+  <!-- 匯入原始模組 2 -->
+  <script type="module">
+    console.log(``);
+    console.log(`import module 2...`);
+    import { getCnt, addCnt } from './module.js';
+    console.log(`getCnt ==>`, getCnt());
+    addCnt();
+  </script>
+  
+  <!-- 匯入 name 參數模組 -->
+  <script type="module" src="./module.js?name=test"></script>
+  
+  <!-- 匯入原始模組 3 -->
+  <script type="module">
+    console.log(``);
+    console.log(`import module 3...`);
+    import { getCnt, addCnt } from './module.js';
+    console.log(`getCnt ==>`, getCnt());
+    addCnt();
+  </script>
+  
+  <!-- 匯入 name 參數模組 2 -->
+  <script type="module">
+    console.log(``);
+    console.log(`[name=test] import module 2...`);
+    import { getCnt, addCnt } from './module.js?name=test';
+    console.log(`[name=test] getCnt ==>`, getCnt());
+    addCnt();
+  </script>
+  
+  
+  <!-- 
+    非模組腳本
+    雖然寫在後面，但仍會優先被執行。
+  -->
+  <script src="./test.js"></script>
+  
+  <!-- 
+    非模組腳本每次匯入都會執行，因此這邊會發生全域變數 count 重複宣告的問題：
+    SyntaxError: Identifier 'count' has already been declared 
+  -->
+  <script src="./test.js"></script>
+  
+  <script>
+    console.log(`==========`);
+    console.log(`我是非模組 JS 腳本區塊`);
+    // 非模組腳本的作用域是相通的，因此這邊可以直接使用 count。
+    count ++;
+    console.log(`count ==> ${count}`);
+  </script>
+  
+</body>
+
+</html>
