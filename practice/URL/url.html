@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL</title>
+  <link rel="stylesheet" href="../../css/all.css">
+</head>
+
+<body>
+  <h1>URL</h1>
+  <p>請開啟 console 觀看測試結果。</p>
+
+  <hr>
+
+  <p>
+    送出表單，會開啟新視窗。<br>
+    用來測試含有參數及 hash tag 的 URL。
+  </p>
+
+  <!-- 表單 -->
+  <form action="#submit" target="_blank">
+    <div class="mb-3">
+      <label>
+        text1：
+        <input type="text" name="text1" value="我的字串" />
+      </label>
+    </div>
+
+    <div class="mb-5">
+      <label>
+        text2：
+        <input type="text" name="text2" value="my text" />
+      </label>
+    </div>
+
+    <div>
+      <button>提交到 #submit</button>
+    </div>
+  </form>
+
+  <hr>
+
+  <!-- window.location.href -->
+  <h2>window.location.href</h2>
+  <div class="flex-btn-group">
+    <button type="button" id="btnLocationBaseTest">URL 基本測試</button>
+    <button type="button" id="btnLocationParam">取得參數</button>
+  </div>
+
+  <hr>
+
+  <!-- 內部模組 import.meta -->
+  <h2>內部模組 import.meta</h2>
+  <p>
+    對內部模組腳本來說，<code>import.meta.url</code> 所取得的 URL 會與 <code>window.location.href</code> 取得的 URL 一致。
+  </p>
+
+  <div class="flex-btn-group">
+    <button type="button" id="btnModuleInsideBaseTest">URL 基本測試</button>
+    <button type="button" id="btnModuleInsideParam">取得參數</button>
+  </div>
+
+  <hr>
+
+  <!-- 外部模組 import.meta -->
+  <h2>外部模組 import.meta</h2>
+  <p>使用外部模組：<code>urlModuleTest.js</code></p>
+
+  <div class="flex-btn-group">
+    <button type="button" id="btnModuleOutsideBaseTest">URL 基本測試</button>
+    <button type="button" id="btnModuleOutsideParam">取得參數</button>
+  </div>
+
+  <hr>
+
+  <!-- 外部模組 (帶參數) import.meta -->
+  <h2>外部模組 (帶參數) import.meta</h2>
+  <p>使用外部模組：<code>urlModuleTest.js?moduleName=moduleParam</code></p>
+
+  <div class="flex-btn-group">
+    <button type="button" id="btnModuleParamOutsideBaseTest">URL 基本測試</button>
+    <button type="button" id="btnModuleParamOutsideParam">取得參數</button>
+  </div>
+
+  <hr>
+
+
+  <script>
+    // 解析參數
+    function parseParam (urlObj) {
+      console.log(urlObj);
+      console.log(`text1 ==>`, urlObj.searchParams.get("text1"));
+      console.log(`text2 ==>`, urlObj.searchParams.get("text2"));
+      console.log(`moduleName ==>`, urlObj.searchParams.get("moduleName"));
+    }
+  </script>
+
+  <!-- 測試 location.href 及 內部模組 -->
+  <script type="module">
+    import { UrlTester } from './js/urlTester.js';
+    import { logger } from './js/logger.js';
+
+    /* window.location.href */
+    console.log(`## 建立測試 - window.location.href`);
+    const locationUrlTester = new UrlTester(window.location.href);
+
+    // URL 基本測試
+    document.querySelector("#btnLocationBaseTest").addEventListener("click", (event) => {
+      console.log(``);
+      logger.logTestItem("window.location.href");
+      locationUrlTester.test();
+      console.log(``);
+      logger.logDivider();
+    });
+
+    // 取得參數
+    document.querySelector("#btnLocationParam").addEventListener("click", (event) => {
+      logger.logTestTitle("window.location.href 取得參數");
+      parseParam(locationUrlTester.getBaseUrlObj());
+      console.log(``);
+      logger.logDivider();
+    });
+
+    console.log(``);
+
+
+    /* 內部模組 */
+    console.log(`## 建立測試 - 內部模組 import.meta.url`);
+    const iModuleUrlTester = new UrlTester(import.meta.url);
+
+    // URL 基本測試
+    document.querySelector("#btnModuleInsideBaseTest").addEventListener("click", (evnet) => {
+      logger.logTestItem("內部模組 import.meta.url");
+      iModuleUrlTester.test();
+      console.log(``);
+      logger.logDivider();
+    });
+
+    // 取得參數
+    document.querySelector("#btnModuleInsideParam").addEventListener("click", (event) => {
+      logger.logTestTitle("內部模組取得參數");
+      parseParam(iModuleUrlTester.getBaseUrlObj());
+      console.log(``);
+      logger.logDivider();
+    });
+
+    console.log(``);
+  </script>
+
+  <!-- 測試外部模組 -->
+  <script type="module">
+    import { getMoudleUrlTester } from './js/urlModuleTest.js';
+    import { logger } from './js/logger.js';
+
+    console.log(`## 建立測試 - 外部模組 import.meta.url`);
+    const oModuleUrlTester = getMoudleUrlTester();
+
+    // URL 基本測試
+    document.querySelector("#btnModuleOutsideBaseTest").addEventListener("click", (evnet) => {
+      logger.logTestItem("外部模組 import.meta.url");
+      oModuleUrlTester.test();
+      console.log(``);
+      logger.logDivider();
+    });
+
+    // 取得參數
+    document.querySelector("#btnModuleOutsideParam").addEventListener("click", (event) => {
+      logger.logTestTitle("外部模組取得參數");
+      parseParam(oModuleUrlTester.getBaseUrlObj());
+      console.log(``);
+      logger.logDivider();
+    });
+
+    console.log(``);
+  </script>
+
+  <!-- 測試外部模組 (帶參數) -->
+  <script type="module">
+    import { getMoudleUrlTester } from './js/urlModuleTest.js?moduleName=moduleParam';
+    import { logger } from './js/logger.js';
+
+    console.log(`## 建立測試 - 外部模組 (帶參數) import.meta.url`);
+    const oModuleParamUrlTester = getMoudleUrlTester();
+
+    // URL 基本測試
+    document.querySelector("#btnModuleParamOutsideBaseTest").addEventListener("click", (evnet) => {
+      logger.logTestItem("外部模組 (帶參數) import.meta.url");
+      oModuleParamUrlTester.test();
+      console.log(``);
+      logger.logDivider();
+    });
+
+    // 取得參數
+    document.querySelector("#btnModuleParamOutsideParam").addEventListener("click", (event) => {
+      logger.logTestTitle("外部模組 (帶參數) 取得參數");
+      parseParam(oModuleParamUrlTester.getBaseUrlObj());
+      console.log(``);
+      logger.logDivider();
+    });
+
+    console.log(``);
+  </script>
+
+</body>
+
+</html>
