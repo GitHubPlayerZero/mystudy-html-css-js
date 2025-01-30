@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>import.meta</title>
+
+  <link rel="stylesheet" href="../../css/all.css">
+</head>
+
+<body>
+  <h1>import.meta 測試</h1>
+  <p>請開啟 console 觀看測試結果。</p>
+
+  <!-- 非模組腳本區塊 -->
+  <script>
+    console.log(`非模組 meta ==>`, import.meta);
+  </script>
+  <script>console.log(`====================`);</script>
+
+  <!-- 模組腳本區塊 -->
+  <script type="module">
+    console.log(`內部模組腳本區塊取得 meta ==>`, import.meta);
+    console.log(`====================`);
+  </script>
+
+  <!-- 使用 src 直接匯入 -->
+  <script type="module">console.log(`使用 src 直接匯入 meta.js ...`);</script>
+  <script type="module" src="./meta.js"></script>
+  <script type="module">console.log(`====================`);</script>
+
+  <!-- 使用 import 匯入 meta.js -->
+  <script type="module">console.log(`使用 import 匯入 meta.js ...`);</script>
+  <script type="module">
+    import './meta.js';
+    console.log(`====================`);
+  </script>
+
+  <!-- 匯入時帶參數 -->
+  <!-- 使用 import 匯入 meta.js?name=test -->
+  <script type="module">console.log(`使用 import 匯入 meta.js?name=test ...`);</script>
+  <script type="module">
+    import './meta.js?name=test';
+    console.log(`====================`);
+  </script>
+  
+  <!-- 使用 src 直接匯入 meta.js?name=test2 -->
+  <script type="module">console.log(`使用 src 直接匯入 meta.js?name=test2 ...`);</script>
+  <script type="module" src="./meta.js?name=test2"></script>
+  <script type="module">console.log(`====================`);</script>
+
+</body>
+
+</html>
