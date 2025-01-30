@@ -1,0 +1,44 @@
+.square {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+}
+
+.section {
+  height: 100dvh;
+}
+
+.title {
+  margin: 100px;
+  text-align: center;
+}
+
+.red {
+  background-color: red;
+}
+
+.pink {
+  background-color: pink;
+}
+.pink-opacity {
+  background-color: rgba(255, 192, 203, 0.3);
+}
+
+.green {
+  background-color: green;
+}
+.green-opacity {
+  background-color: rgba(0, 128, 0, 0.3);
+}
+
+.blue {
+  background-color: blue;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.orchid {
+  background-color: orchid;
+}

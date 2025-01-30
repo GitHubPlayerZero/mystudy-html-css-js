@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基礎 | 切版直播班 | GSAP</title>
+
+  <link rel="stylesheet" href="/css/all.css">
+  <link rel="stylesheet" href="./common.css">
+</head>
+
+<body>
+  <h1>GSAP：切版直播班教學 - 基礎範例</h1>
+
+  <h2>移動模式</h2>
+
+  <div class="box">
+    <h3>to：預設狀態 → 指定狀態</h3>
+    <div class="to square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>from：指定狀態 → 預設狀態</h3>
+    <div class="from square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>fromTo：起點 → 終點</h3>
+    <div class="fromto square blue"></div>
+  </div>
+
+  <hr>
+
+  <h2>延遲</h2>
+
+  <div class="box">
+    <div class="delay square blue"></div>
+  </div>
+
+  <hr>
+
+  <h2>重複</h2>
+
+  <div class="box">
+    <h3>重複 2 次</h3>
+    <p>注意：預設會先有 1 次，接著再重複 2 次，所以最後總共跑了 3 次。</p>
+    <div class="repeat2 square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>無限重複</h3>
+    <div class="repeat-forever square blue"></div>
+  </div>
+
+  <hr>
+
+  <h2>速率（Easing）</h2>
+  <a href="https://gsap.com/docs/v3/Eases" target="_blank">官方文件</a>
+
+  <div class="box">
+    <h3>power4.out（由快至慢）</h3>
+    <div class="ease-power4-out square blue"></div>
+
+    <h3>power4.in（由慢至快）</h3>
+    <div class="ease-power4-in square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>bounce.out（結束時彈跳）</h3>
+    <div class="ease-bounce-out square blue"></div>
+
+    <h3>bounce.in（開始時彈跳）</h3>
+    <div class="ease-bounce-in square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>back.out（結束時超過再返回）</h3>
+    <div class="ease-back-out square blue"></div>
+
+    <h3>back.in（開始時超過再返回）</h3>
+    <div class="ease-back-in square blue"></div>
+  </div>
+
+  <hr>
+
+  <h2>Timeline</h2>
+  <a href="https://gsap.com/docs/v3/GSAP/Timeline/" target="_blank">官方文件</a>
+
+  <div class="box">
+    <h3>基本範例 - 一個接一個執行</h3>
+    <div class="timeline-first square red mb-4"></div>
+    <div class="timeline-second square green mb-4"></div>
+    <div class="timeline-third square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>指定絕對的等待時間</h3>
+
+    <p>4 秒後執行，跑 3 秒</p>
+    <div class="timeline2-first square red mb-4"></div>
+
+    <p>2 秒後執行，跑 3 秒</p>
+    <div class="timeline2-second square green mb-4"></div>
+
+    <p>沒有設定時間，會在前面都跑完後接續最後一個跑</p>
+    <div class="timeline2-third square blue"></div>
+  </div>
+
+  <div class="box">
+    <h3>指定相對的等待時間</h3>
+    <p class="highlight">注意：是相對於前面所有執行者中最長的時間</p>
+
+    <div class="timeline3-first square red mb-4"></div>
+    <div class="timeline3-second square green mb-4"></div>
+    <div class="timeline3-third square blue mb-4"></div>
+    <div class="timeline3-fourth square pink mb-4"></div>
+    <div class="timeline3-fifth square orange mb-4"></div>
+    <div class="timeline3-sixth square orchid"></div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="./base.js"></script>
+</body>
+
+</html>

@@ -13,32 +13,39 @@
   <h1>import.meta 測試</h1>
   <p>請開啟 console 觀看測試結果。</p>
 
-  <!-- 非模組腳本區塊 -->
+  <!--
+    非模組腳本區塊無法使用 import.meta 語法，這邊會發生錯誤：
+    SyntaxError: Cannot use 'import.meta' outside a module
+  -->
   <script>
     console.log(`非模組 meta ==>`, import.meta);
   </script>
   <script>console.log(`====================`);</script>
 
-  <!-- 模組腳本區塊 -->
+  <!-- 內部模組腳本區塊 -->
   <script type="module">
     console.log(`內部模組腳本區塊取得 meta ==>`, import.meta);
     console.log(`====================`);
   </script>
 
-  <!-- 使用 src 直接匯入 -->
+  <!-- 外部模組 -->
+  <!-- 使用 src 直接匯入 meta.js -->
   <script type="module">console.log(`使用 src 直接匯入 meta.js ...`);</script>
   <script type="module" src="./meta.js"></script>
   <script type="module">console.log(`====================`);</script>
 
   <!-- 使用 import 匯入 meta.js -->
+  <!-- 由於前面已經有使用 src 匯入過了，相同的模組只會執行第一次，因此這邊不會有 meta 資訊。 -->
   <script type="module">console.log(`使用 import 匯入 meta.js ...`);</script>
   <script type="module">
     import './meta.js';
+    console.log(`由於前面已經有使用 src 匯入過了，相同的模組只會執行第一次，因此這邊不會有  meta 資訊。`);
     console.log(`====================`);
   </script>
 
-  <!-- 匯入時帶參數 -->
+  <!-- 外部模組 (匯入時帶參數) -->
   <!-- 使用 import 匯入 meta.js?name=test -->
+  <!-- 因為帶有參數，所以會被視為與之前不同的模組而再執行一次 -->
   <script type="module">console.log(`使用 import 匯入 meta.js?name=test ...`);</script>
   <script type="module">
     import './meta.js?name=test';
@@ -46,6 +53,7 @@
   </script>
   
   <!-- 使用 src 直接匯入 meta.js?name=test2 -->
+  <!-- 因為參數不同，所以會被視為與之前不同的模組而再執行一次 -->
   <script type="module">console.log(`使用 src 直接匯入 meta.js?name=test2 ...`);</script>
   <script type="module" src="./meta.js?name=test2"></script>
   <script type="module">console.log(`====================`);</script>

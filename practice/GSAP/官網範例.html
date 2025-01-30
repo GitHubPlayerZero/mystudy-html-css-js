@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>官網範例</title>
+
+  <style>
+    .box {
+      height: 80px;
+      width: 80px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .purple {
+      background-color: purple;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>官網範例</h1>
+
+  <div class="box green"></div>
+  <div class="box purple"></div>
+  <div class="box blue"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script>
+    // 當建立成共用的設定時，需要用拷貝的方式給入 gsap，不然此共用設定的內容會被改變
+    const settings = {
+      rotation: 360,
+      x: 100,
+      duration: 1
+    };
+    console.dir(settings);
+
+    // target the element with a class of "green" - rotate and move TO 100px to the left over the course of 1 second. 
+    // gsap.to(".green", settings);
+    gsap.to(".green", { ...settings });
+
+    // target the element with a class of "purple" - rotate and move FROM 100px to the left over the course of 1 second. 
+    // gsap.from(".purple", settings);
+    gsap.from(".purple", { ...settings });
+
+    // target the element with a class of "blue" - rotate and move FROM 100px to the left, TO 100px to the right over the course of 1 second. 
+    gsap.fromTo(".blue", { x: -200 }, { ...settings });
+  </script>
+</body>
+
+</html>
