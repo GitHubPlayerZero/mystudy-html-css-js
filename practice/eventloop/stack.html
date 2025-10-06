@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Stack | 同步</title>
+  <link rel="stylesheet" href="../../css/all.css">
+</head>
+
+<body>
+  <h1>Call Stack 測試（同步）</h1>
+
+  <ul class="mb-10">
+    <li>開啟 console 後重整，藉由 <code>debugger</code> 觀察 Call Stack。</li>
+    <li>進入程式時會直接跑，點擊按鈕時也會跑，可以觀察到 Call Stack 不同的全域執行環境。</li>
+  </ul>
+
+  <div class="flex-btn-group">
+    <button type="button" onclick="printSquare();">測試 Call Stack</button>
+  </div>
+
+
+  <script>
+    function multiply (a, b) {
+      debugger;
+      const result = a * b;
+      debugger;
+      return result;
+    }
+
+    function square (n) {
+      debugger;
+      const result = multiply(n, n);
+      debugger;
+      return result;
+    }
+
+    function printSquare (n) {
+      debugger;
+      const squared = square(n);
+      debugger;
+      console.log(squared);
+      debugger;
+    }
+
+    debugger;
+    printSquare(4);
+    debugger;
+  </script>
+</body>
+
+</html>

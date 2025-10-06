@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Stack | 非同步</title>
+  <link rel="stylesheet" href="../../css/all.css">
+</head>
+
+<body>
+  <h1>Call Stack 測試（非同步）</h1>
+
+  <ul class="mb-10">
+    <li>開啟 console 後重整，藉由 <code>debugger</code> 觀察 Call Stack。</li>
+    <li>進入程式時會直接跑，點擊按鈕時也會跑，可以觀察到 Call Stack 不同的全域執行環境。</li>
+  </ul>
+
+  <div class="flex-btn-group">
+    <button type="button" onclick="testStack();">測試 setTimeout</button>
+  </div>
+
+
+  <script>
+    function testStack () {
+      console.clear();
+      console.time('早安');
+
+      function eatBreakfast () {
+        console.log(`吃早餐`);
+      }
+
+      function washDishes () {
+        console.log(`洗餐盤`);
+        debugger; // debug #1
+
+        // 模擬洗盤子耗費的時間
+        let dishId = 0;
+        for (let i = 0; i < 100000000; i++) {
+          dishId = parseInt(Math.random() * i);
+        }
+        console.log(`dishId = ${dishId}`);
+      }
+
+      function callSomeone (someone) {
+        debugger; // debug #3
+
+        // 等待 N 秒後執行
+        setTimeout(() => {
+          debugger; // debug #6
+          console.log(`打給 ${someone}`);
+        }, 4000);
+      }
+
+      (function goodMorning () {
+        eatBreakfast();
+        washDishes();
+        debugger; // debug #2
+        callSomeone('漂亮阿姨');
+        debugger; // debug #4
+      })();
+
+      console.timeEnd('早安');
+    }
+
+    testStack();
+    debugger; // debug #5
+  </script>
+
+</body>
+
+</html>

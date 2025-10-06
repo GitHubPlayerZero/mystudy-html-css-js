@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宏任務、微任務</title>
+  <link rel="stylesheet" href="../../css/all.css">
+</head>
+
+<body>
+  <h1>宏任務、微任務</h1>
+
+  <div class="flex-btn-group">
+    <button type="button" onclick="test1();">基本測試</button>
+    <button type="button" onclick="test2();">嵌套測試</button>
+    <button type="button" onclick="test3();">巢狀函式測試</button>
+  </div>
+
+
+  <script>
+    console.log(`腳本 #1`);
+
+    // 基本測試
+    function test1 () {
+      console.clear();
+      console.log('開始');
+
+      setTimeout(() => {
+        console.log('宏任務 1');
+      }, 0);
+
+      Promise.resolve().then(() => {
+        console.log('微任務 1');
+      });
+
+      setTimeout(() => {
+        console.log('宏任務 2');
+      }, 0);
+
+      Promise.resolve().then(() => {
+        console.log('微任務 2');
+      });
+
+      console.log('結束');
+      // 輸出：開始 → 結束 → 微任務 1 → 微任務 2 → 宏任務 1 → 宏任務 2
+    }
+
+    // 嵌套測試
+    function test2 () {
+      console.clear();
+      console.log(`開始`);
+
+      setTimeout(() => {
+        console.log('[setTimeout #1]');
+        Promise.resolve().then(() => {
+          console.log('[setTimeout #1] Promise resolve #1');
+        });
+        Promise.resolve().then(() => {
+          console.log('[setTimeout #1] Promise resolve #2');
+        });
+      }, 0);
+
+      new Promise((resolve) => {
+        console.log('[Promise resolve #1]');
+        resolve();
+      })
+        .then(() => {
+          console.log('[Promise then #1]');
+
+          setTimeout(() => {
+            console.log('[Promise then #1] setTimeout');
+          }, 0);
+
+          Promise.resolve().then(() => {
+            console.log('[Promise then #1] Promise resolve');
+          });
+        });
+
+      console.log('結束');
+      /**
+       * 結果：
+       * 開始
+       * [Promise resolve #1]
+       * 結束
+       * [Promise then #1]
+       * [Promise then #1] Promise resolve
+       * [setTimeout #1]
+       * [setTimeout #1] Promise resolve #1
+       * [setTimeout #1] Promise resolve #2
+       * [Promise then #1] setTimeout
+       * 
+       * 結論：
+       * Call Stack 為空後會先執行所有微任務（包含後來又插入的），
+       * 執行完之後會取出一個宏任務放到 Call Stack 裡執行。
+       * 重複以上步驟。
+       */
+    }
+
+    // 巢狀函式測試
+    function test3 () {
+      console.clear();
+      console.log(`巢狀函式開始`);
+
+      setTimeout(() => {
+        console.log('Macro #1');
+      }, 0);
+
+      function callMacro () {
+        setTimeout(() => {
+          console.log('Macro #2');
+        }, 0);
+
+        function callMicro () {
+          Promise.resolve().then(() => {
+            console.log('Micro #1');
+          });
+        }
+
+        callMicro();
+      }
+
+      callMacro();
+      /**
+       * 結果：
+       * 巢狀函式開始
+       * 巢狀函式結束
+       * Micro #1
+       * Macro #1
+       * Macro #2
+       * 
+       * 結論：即使是巢狀函式結論也是一樣的。
+       **/
+
+      console.log(`巢狀函式結束`);
+    }
+  </script>
+
+  <script>
+    console.log(`腳本 #2`);
+  </script>
+</body>
+
+</html>
