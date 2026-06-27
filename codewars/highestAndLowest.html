@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highest and Lowest</title>
+  <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+
+  <h1>Highest and Lowest (7kyu)</h1>
+  <p><a href="https://www.codewars.com/kata/554b4ac871d6813a03000035/train/javascript" target="_blank">題目</a></p>
+
+  <p>
+    In this little assignment you are given a string of space separated numbers, and have to return the highest and
+    lowest number.
+  </p>
+  <p>
+    在這個小作業中，你會被分配一串空格分隔的數字，並必須回傳最高和最小的數字。
+  </p>
+
+  <p>
+    範例：<br />
+    <code>
+      highAndLow("1 2 3 4 5"); // return "5 1"<br />
+      highAndLow("1 2 -3 4 5"); // return "5 -3"<br />
+      highAndLow("1 9 3 4 -5"); // return "9 -5"<br />
+    </code>
+  </p>
+
+  <input type="button" value="測試" onclick="test(highAndLow, testCase);">
+
+  <hr>
+
+
+  <script src="./codewars.js"></script>
+  <script>
+
+    const testCase = [
+      {
+        case: "8 3 -5 42 -1 0 0 -9 4 7 4 -4",
+        answer: "42 -9",
+      },
+      {
+        case: "1 2 3",
+        answer: "3 1",
+      },
+      {
+        case: "1 2 -3 4 5",
+        answer: "5 -3",
+      },
+      {
+        case: "42 undefined",
+        answer: "42 42",
+      },
+      {
+        case: "42 null",
+        answer: "42 42",
+      },
+    ];
+
+    // 方式 1
+    /* function highAndLow (numbers) {
+      const numberAry = numbers.split(" ")
+        .map(Number)
+        .filter((item) => {
+          return Number.isInteger(item);
+        })
+        .sort((a, b) => {
+          return b - a;
+        });
+
+      return `${numberAry[0]} ${numberAry[numberAry.length - 1]}`;
+    } */
+
+    // 方式 2
+    /* function highAndLow (numbers) {
+      let max = null;
+      let min = null;
+
+      const numberAry = numbers.split(" ")
+        .forEach((item, index) => {
+          const num = Number(item);
+
+          // 不為數字則略過
+          if (!Number.isInteger(num)) {
+            return;
+          }
+
+          // 若 max 及 min 均為 null，則代表需要初始化，直接放入
+          if (max === null && min === null) {
+            max = num;
+            min = num;
+          }
+          // 若元素 >= max 則取代之
+          else if (num >= max) {
+            max = num;
+          }
+          // 若元素 < min 則取代之
+          else if (num < min) {
+            min = num;
+          }
+        });
+
+      return `${max} ${min}`;
+    } */
+
+    // 方式 3
+    function highAndLow (numbers) {
+      const numberAry = numbers.split(" ")
+        .map(Number)
+        .filter((item) => {
+          return Number.isInteger(item);
+        });
+
+      return `${Math.max(...numberAry)} ${Math.min(...numberAry)}`;
+    }
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exes and Ohs</title>
+  <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+
+  <h1>Exes and Ohs (7kyu)</h1>
+  <p><a href="https://www.codewars.com/kata/55908aad6620c066bc00002a/train/javascript" target="_blank">題目</a></p>
+
+  <p>
+    Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case
+    insensitive. The string can contain any char.
+  </p>
+
+  <p>
+    檢查字串是否有相同數量的 'x' 和 'o'。該方法必須回傳一個布林值，且不區分大小寫。字串可以包含任何 char。
+  </p>
+
+  <p>
+    範例：<br />
+    <code>
+      XO("ooxx") => true<br />
+      XO("xooxx") => false<br />
+      XO("ooxXm") => true<br />
+      XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true<br />
+      XO("zzoo") => false
+    </code>
+  </p>
+
+  <input type="button" value="測試" onclick="test(checkXo, testCase);">
+
+  <hr>
+
+
+  <script src="./codewars.js"></script>
+  <script>
+
+    const testCase = [
+      {
+        case: "xo",
+        answer: true,
+      },
+      {
+        case: "XO",
+        answer: true,
+      },
+      {
+        case: "xxxoo",
+        answer: false,
+      },
+      {
+        case: "xxOo",
+        answer: true,
+      },
+      {
+        case: "",
+        answer: true,
+      },
+      {
+        case: "ooxXm",
+        answer: true,
+      },
+      {
+        case: "zzoo",
+        answer: false,
+      },
+      {
+        case: "xooxx",
+        answer: false,
+      },
+      {
+        case: "zpzpzpp",
+        answer: true,
+      },
+    ];
+
+    // 方式一
+    /* function checkXo (str) {
+      str = str.toLowerCase();
+      let countX = countO = 0;
+
+      for (let char of str) {
+        switch (char) {
+          case "x":
+            ++countX;
+            break;
+          case "o":
+            ++countO;
+            break;
+        }
+      }
+
+      return countX === countO;
+    } */
+
+    // 方式二
+    // 字串會被計算兩次
+    /* function checkXo (str) {
+      let strX = str.match(/x/gi) ?? "";
+      let strO = str.match(/o/gi) ?? "";
+
+      return strX.length === strO.length;
+    } */
+
+    // 方式三
+    function checkXo (str) {
+      str = str.toLowerCase();
+      let sum = 0;
+
+      for (let char of str) {
+        switch (char) {
+          case "x":
+            ++sum;
+            break;
+          case "o":
+            --sum;
+            break;
+        }
+      }
+
+      return sum === 0;
+    }
+
+  </script>
+
+</body>
+
+</html>

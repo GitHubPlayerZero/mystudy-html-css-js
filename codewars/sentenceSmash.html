@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentence Smash</title>
+  <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+
+  <h1>Sentence Smash (8kyu)</h1>
+  <p><a href="https://www.codewars.com/kata/53dc23c68a0c93699800041d/train/javascript" target="_blank">題目</a></p>
+
+  <p>
+    Write a function that takes an array of words and smashes them together into a sentence and returns the sentence.
+    You can ignore any need to sanitize words or add punctuation, but you should add spaces between each word. Be
+    careful, there shouldn't be a space at the beginning or the end of the sentence!
+  </p>
+  <p>
+    寫一個函式，將一組單字拼湊成一句話，然後回傳句子。你可以忽略任何需要美化詞語或加標點符號的需求，但你應該在每個字之間加空格。要小心，句子開頭和結尾不應該有空格！
+  </p>
+
+  <p>
+    範例：<br />
+    <code>
+      ['hello', 'world', 'this', 'is', 'great']  =>  'hello world this is great'
+    </code>
+  </p>
+
+  <input type="button" value="測試" onclick="test(smash, testCase);">
+
+  <hr>
+
+  <p>
+    使用 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/join"
+      target="_blank">join</a>。
+  </p>
+
+
+  <script src="./codewars.js"></script>
+  <script>
+
+    const testCase = [
+      {
+        case: [],
+        answer: "",
+      },
+      {
+        case: ["hello"],
+        answer: "hello",
+      },
+      {
+        case: ["hello", "world"],
+        answer: "hello world",
+      },
+      {
+        case: ["hello", "amazing", "world"],
+        answer: "hello amazing world",
+      },
+      {
+        case: ["this", "is", "a", "really", "long", "sentence"],
+        answer: "this is a really long sentence",
+      },
+    ];
+
+    function smash (words) {
+      return words.join(" ");
+    }
+
+  </script>
+
+</body>
+
+</html>

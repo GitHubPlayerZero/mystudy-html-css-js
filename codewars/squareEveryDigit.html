@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Square Every Digit</title>
+  <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+
+  <h1>Square Every Digit (7kyu)</h1>
+  <p><a href="https://www.codewars.com/kata/546e2562b03326a88e000020/train/javascript" target="_blank">題目</a></p>
+
+  <p>
+    Welcome. In this kata, you are asked to square every digit of a number and concatenate them.<br />
+    For example, if we run 9119 through the function, 811181 will come out, because 92 is 81 and 12 is 1.
+    (81-1-1-81)<br />
+    Example #2: An input of 765 will/should return 493625 because 72 is 49, 62 is 36, and 52 is 25. (49-36-25)<br />
+    Note: The function accepts an integer and returns an integer.
+  </p>
+
+  <p>
+    歡迎。在這個修練裡，你要把每個數字的位數平方並串接起來。<br />
+    例如，如果我們用 9119 執行函數，811181會出來，因為 92 是 81,12 是 1。 (81-1-1-81)<br />
+    範例 #2：輸入 765 會回傳 493625，因為 72 是 49,62 是 36,52 是 25。 (49-36-25)<br />
+    注意：該函數接受整數並回傳整數。
+  </p>
+
+  <input type="button" value="測試" onclick="test(squareDigits, testCase);">
+
+  <hr>
+
+
+  <script src="./codewars.js"></script>
+  <script>
+
+    const testCase = [
+      {
+        case: 3212,
+        answer: 9414,
+      },
+      {
+        case: 2112,
+        answer: 4114,
+      },
+      {
+        case: 0,
+        answer: 0,
+      },
+      {
+        case: 9119,
+        answer: 811181,
+      },
+      {
+        case: 765,
+        answer: 493625,
+      },
+    ];
+
+    function squareDigits (num) {
+      const result = [...String(num)].map((item) => {
+        return item ** 2;
+      }).join("");
+
+      return Number(result);
+    }
+
+  </script>
+
+</body>
+
+</html>

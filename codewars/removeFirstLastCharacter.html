@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remove First and Last Character</title>
+  <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+
+  <h1>Remove First and Last Character (8kyu)</h1>
+  <p><a href="https://www.codewars.com/kata/56bc28ad5bdaeb48760009b0/train/javascript" target="_blank">題目</a></p>
+
+  <p>
+    Your goal is to write a function that removes the first and last characters of a string. You're given one parameter,
+    the original string.<br />
+    Important: Your function should handle strings of any length ≥ 2 characters. For strings with exactly 2 characters,
+    return an empty string.
+  </p>
+
+  <p>
+    你的目標是寫一個函式，能移除字串的首尾兩個字元。你只得到一個參數，就是原始字串。<br />
+    重要提示：你的函式應該能處理任何長度≥ 2 字元的字串。對於字串只有恰好 2 個字元，則回傳一個空字串。
+  </p>
+
+  <p>
+    範例：<br />
+    <code>
+      'eloquent' --> 'loquen'<br />
+      'country'  --> 'ountr'<br />
+      'person'   --> 'erso'<br />
+      'ab'       --> '' (empty string)<br />
+      'xyz'      --> 'y'
+    </code>
+  </p>
+
+  <input type="button" value="測試" onclick="test(removeChar, testCase);">
+
+  <hr>
+
+
+  <script src="./codewars.js"></script>
+  <script>
+
+    const testCase = [
+      {
+        case: "eloquent",
+        answer: "loquen",
+      },
+      {
+        case: "country",
+        answer: "ountr",
+      },
+      {
+        case: "person",
+        answer: "erso",
+      },
+      {
+        case: "place",
+        answer: "lac",
+      },
+      {
+        case: "ooopsss",
+        answer: "oopss",
+      },
+      {
+        case: "a",
+        answer: "",
+      },
+      {
+        case: "ab",
+        answer: "",
+      },
+      {
+        case: "xyz",
+        answer: "y",
+      },
+      {
+        case: "",
+        answer: "",
+      },
+    ];
+
+    // 方式 1
+    /* function removeChar (str) {
+      if (str.length <= 2) {
+        return "";
+      }
+
+      return str.substring(1, str.length - 1);
+    }; */
+
+    // 方式 2
+    function removeChar (str) {
+      return str.slice(1, -1);
+    };
+
+  </script>
+
+</body>
+
+</html>
